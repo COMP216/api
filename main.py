@@ -17,11 +17,11 @@ app = flask.Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///flask_db.db'
 db = SQLAlchemy(app)
 # Load "model.pkl"
-clf1 = joblib.load("D:/STUDY/SEM 5/COMP309/Group Project/model_clf1.pkl")
+clf1 = joblib.load("D:/STUDY/SEM 5/COMP216/Group Project/model_clf1.pkl")
 selectedCols = joblib.load(
-    "D:/STUDY/SEM 5/COMP309/Group Project/selected_columns.pkl")
-X = pd.read_csv("D:/STUDY/SEM 5/COMP309/Group Project/X.csv")
-Y = pd.read_csv("D:/STUDY/SEM 5/COMP309/Group Project/Y.csv")
+    "D:/STUDY/SEM 5/COMP216/Group Project/selected_columns.pkl")
+X = pd.read_csv("D:/STUDY/SEM 5/COMP216/Group Project/X.csv")
+Y = pd.read_csv("D:/STUDY/SEM 5/COMP216/Group Project/Y.csv")
 
 
 class FileContents(db.Model):
@@ -65,7 +65,6 @@ def getAttributes():
     attributes.confusionMatrix = confusionMatrix.tolist()
     return jsonify(attributes.__dict__)
 
-# we need to show scor
 
 
 @app.route('/api/v1/bicycletheft/predict', methods=['POST'])
@@ -206,7 +205,7 @@ def predict():
 
     orginal_data['predict'] = np.where(prodProb_df[0] >= 0.05, 1, 0)
     orginal_data.to_csv(
-        r'D:/STUDY/SEM 5/COMP309/Group Project/userOutputFile.csv', index=True)
+        r'D:/STUDY/SEM 5/COMP216/Group Project/userOutputFile.csv', index=True)
 
     return "Run successfully"
 
